@@ -1,32 +1,39 @@
 <h1>{{type}}s!</h1>
 
-<h2>{{type}}s available to eat!</h2>
-
-<ol>
-    {{#each pies}}
-    {{#unless devoured}}
-    {{> pies/pie-block devoured=true}}
-    {{/unless}}
-    {{/each}}
-</ol>
-
-<h2>{{type}}s already eaten!</h2>
-
-<ol>
-    {{#each pies}}
-    {{#if devoured}}
-    {{> pies/pie-block devoured=false}}
-    {{/if}}
-    {{/each}}
-</ol>
-
-<h2>Add a {{type}}</h2>
-<form class="create-form">
-
-    <div class="form-group">
-        <label for="pie">{{type}} Name:</label>
-        <input type="text" id="pie" name="pieName">
+<div class="row">
+    <div class="col s6">
+        <ol>
+            {{#each pies}}
+            {{#unless devoured}}
+            {{> pies/pie-block devoured=true}}
+            {{/unless}}
+            {{/each}}
+        </ol>
     </div>
 
-    <button type="submit">Add {{type}}</button>
-</form>
+    <div class="col s6">
+        <ol>
+            {{#each pies}}
+            {{#if devoured}}
+            {{> pies/pie-block devoured=false}}
+            {{/if}}
+            {{/each}}
+        </ol>
+    </div>
+
+    <div class="col s12">
+        <h2>Add a {{type}}</h2>
+        <form class="create-form">
+
+            <div class="form-group">
+                <label for="pie">{{type}} Name:</label>
+                <input type="text" id="pie" name="pieName">
+            </div>
+
+            <button type="submit">Add {{type}}</button>
+        </form>
+        <p class="flow-text">
+            Don't see the kind of pie you want to eat here? Add another!
+        </p>
+    </div>
+</div>
