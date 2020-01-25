@@ -1,38 +1,76 @@
 // Require the exported module in connection.js
-var connection = require("./connection.js");
+var connection = require("../config/connection.js");
+
+function printQuestionMarks(num) {
+    var arr = [];
+
+    for (var i = 0; i < num; i++) {
+        arr.push("?");
+    }
+    // return a string
+    return arr.toString();
+}
+
+// Helper function to convert object key/value pairs to SQL syntax
+function objToSql(ob) {
+    var arr = [];
+
+    // loop through the keys and push the key/value as a string int arr
+    for (var key in ob) {
+        var value = ob[key];
+        if (Object.hasOwnProperty.call(ob, key)) {
+            // if string with spaces, add quotations 
+            if (typeof value === "string" && value.indexOf(" ") >= 0) {
+                value = "'" + value + "'";
+            }
+            arr.push(key + "=" + value);
+        }
+    }
+    // return a string
+    return arr.toString();
+}
 
 var orm = {
     // build an object function to select all from pies table
-    selectAll: function (tableInput) {
+    selectAll: function (tableInput, cb) {
         // Build a query for selecting all elements from a given table
-        var queryString = "SELECT * FROM ??";
+        var queryString = `SELECT * FROM ${tableInput};`;
 
-        connection.query(queryString, [tableInput], function (err, result) {
-            if (err) throw err;
+        connection.query(queryString, function (err, result) {
+            if (err) {
+                throw err;
+            }
+            cb(result);
             console.log(result);
         });
     },
     // build an object function to insert one row into a table
-    insertOne: function (tableInput, colName, colVal) {
-        // build a query for inserting one row of information with one column value defined, as in this case, the table generates ids automatically and defaults the devoured column to false
-        var queryString = "INSERT INTO ?? (??) VALUES ?";
+    insertOne: function (tableInput, colName, colVal, cb) {
+
+        var queryString = `INSERT INTO ${tableInput} (${colName.toString()}, devoured) VALUES ('${colVal}', false)`;
         console.log(queryString);
 
-        connection.query(queryString, [tableInput, colName, colVal], function (err, result) {
-            if (err) throw err;
-            console.log(result);
+        connection.query(queryString, function (err, result) {
+            if (err) {
+                throw err;
+            }
+
+            cb(result);
         });
     },
     // build an object function to update one row in a table
-    updateOne: function (tableInput, colName, colVal, colValId) {
-        // build a query to update a row of data when a value has been changed, in this case, set devoured to true at a specific id when that pie has been eaten
-        var queryString = "UPDATE ?? SET ?? = ?? WHERE ?? = ??";
+    updateOne: function (tableInput, colVal, condition, cb) {
+
+        var queryString = `UPDATE ${tableInput} SET ${objToSql(colVal)} WHERE ${condition}`;
 
         connection.query(
-            queryString, [tableInput, colName, colVal, colValId],
+            queryString,
             function (err, result) {
-                if (err) throw err;
-                console.log(result);
+                if (err) {
+                    throw err;
+                }
+
+                cb(result);
             }
         );
     }
