@@ -1,12 +1,14 @@
+// require dotenv, mysql, and keys.js
 require("dotenv").config();
 var mysql = require("mysql");
 var keys = require("../keys.js");
+
+// add in variables to handle the .env stored information accessed by keys.js, also blank connection variable
+var db_pw = keys.db.pw;
+var db_name = keys.db.name;
 var connection;
 
-var db_pw = keys.db.pw;
-var db_name = keys.db.name
-
-// Set up connection to Pie DB
+// Set up connection to the pie database
 if (process.env.JAWSDB_URL) {
     connection = mysql.createConnection(process.env.JAWSDB_URL);
 } else {
