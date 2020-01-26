@@ -1,5 +1,6 @@
 <h1 class="center-align">{{type}}s!<br />
-    <img src="/assets/img/pie.png" class="centerpie">
+    <img src="/assets/img/pie.png" class="centerpie"
+        alt="A fresh baked pie with steam rising from the slits on the top.">
 </h1>
 
 <div class="row">
@@ -28,9 +29,11 @@
 
     <div class="col s12 pies">
         <div class="hide-on-med-and-down">
+            {{!-- hide on smaller screens --}}
             <h2>Add a {{type}}</h2>
         </div>
         <div class="hide-on-large-only">
+            {{!-- hide on desktop --}}
             <h4>Add a {{type}}</h4>
         </div>
         <form class="create-form">
