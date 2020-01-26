@@ -28,25 +28,27 @@
     </div>
 
     <div class="col s12 pies">
-        <div class="hide-on-med-and-down">
-            {{!-- hide on smaller screens --}}
-            <h2>Add a {{type}}</h2>
-        </div>
-        <div class="hide-on-large-only">
-            {{!-- hide on desktop --}}
-            <h4>Add a {{type}}</h4>
-        </div>
-        <form class="create-form">
-
-            <div class="form-group">
-                <label for="pie">{{type}} Name:</label>
-                <input type="text" id="pie" name="pieName">
+        <div class="pies3">
+            <div class="hide-on-med-and-down">
+                {{!-- hide on smaller screens --}}
+                <h2>Add a {{type}}</h2>
             </div>
+            <div class="hide-on-large-only">
+                {{!-- hide on desktop --}}
+                <h4>Add a {{type}}</h4>
+            </div>
+            <form class="create-form">
 
-            <button type="submit">Add {{type}}</button>
-        </form>
-        <p class="flow-text">
-            Don't see the kind of pie you want to eat here? Add another!
-        </p>
+                <div class="form-group">
+                    <label for="pie">{{type}} Name:</label>
+                    <input type="text" id="pie" name="pieName">
+                </div>
+
+                <button type="submit" class="waves-effect deep-purple lighten-2 btn-small">Add {{type}}</button>
+            </form>
+            <p class="flow-text">
+                Don't see the kind of pie you want to eat here? Add another!
+            </p>
+        </div>
     </div>
 </div>
