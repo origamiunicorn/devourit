@@ -22,7 +22,7 @@ $(function () {
     });
 
     $(".create-form").on("submit", function (event) {
-        // Make sure to preventDefault on a submit event.
+        // prevent default for submit
         event.preventDefault();
 
         var newPie = {
